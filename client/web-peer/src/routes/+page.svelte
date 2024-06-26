@@ -1,57 +1,32 @@
 <script>
-    import { onMount } from 'svelte';
-    import { v4 as uuidv4 } from 'uuid';
+    import { onMount, onDestroy } from 'svelte';
+    import { websocketStore } from '$lib/websocketStore';
     
-    const myUuid = uuidv4();
-
-    let socket;
     onMount(() => {
-        initializeWebSocket();
+        websocketStore.connect('ws://localhost:3000/ws',
+            { onOpen, onMessage, onClose, onError }    
+        )
     });
 
-    const sendWsMessage = (type, body) => {
-        const json = {
-            type,
-            body,
-        }; 
-        console.log('[client]message sent: ', json);
-        socket.send(JSON.stringify(json));
-    };
+    onDestroy(() => {
+        websocketStore.close();
+    });
 
-    function initializeWebSocket() {
-        socket = new WebSocket("ws://localhost:3000/ws");
-
-        socket.addEventListener("open", () => {
-            console.log("WebSocket connection opened.");
-            // Example: Send a message when the connection is open
-            sendWsMessage("join", myUuid);
-        });
-
-        socket.addEventListener("message", (event) => {
-            console.log('[client]message received', event.data);
-            const parsedMessage = JSON.parse(event.data);
-            switch (parsedMessage.type) {
-                case 'joined':
-                    const body = parsedMessage.body;
-                    console.log('users in this channel', body);
-                    break;            
-                default:
-                    break;
-            }
-        });
-
-        socket.addEventListener("close", () => {
-            console.log("WebSocket connection closed. Attempting to reconnect...");
-            // Attempt to reconnect after a delay
-            setTimeout(initializeWebSocket, 1000);
-        });
-
-        socket.addEventListener("error", (error) => {
-            console.error("WebSocket error: ", error);
-            socket.close();
-        });
+    function onOpen() {
+        console.log('Connected to server');
+    }
+    
+    function onClose() {
+        console.log('Disconnected from server');
     }
 
+    function onError(event) {
+        console.error('Error:', event);
+    }
+
+    function onMessage(event) {
+        console.log('Message received:', event.data);
+    }
 
 </script>
 

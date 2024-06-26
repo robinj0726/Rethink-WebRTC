@@ -1,22 +1,34 @@
 <script>
     import { onMount } from 'svelte';
+    import { v4 as uuidv4 } from 'uuid';
     
+    const myUuid = uuidv4();
+
     let socket;
     onMount(() => {
         initializeWebSocket();
     });
 
+    const sendWsMessage = (type, body) => {
+        const json = {
+            type,
+            body,
+        }; 
+        console.log('[client]Sent message: ', json);
+        socket.send(JSON.stringify(json));
+    };
+
     function initializeWebSocket() {
-        socket = new WebSocket("ws://localhost:3000/hello-ws");
+        socket = new WebSocket("ws://localhost:3000/ws");
 
         socket.addEventListener("open", () => {
             console.log("WebSocket connection opened.");
             // Example: Send a message when the connection is open
-            socket.send("Hello, server!");
+            sendWsMessage("join", myUuid);
         });
 
         socket.addEventListener("message", (event) => {
-            console.log("Message from server ", event.data);
+            console.log("[client]Message from server ", event.data);
         });
 
         socket.addEventListener("close", () => {
@@ -30,6 +42,8 @@
             socket.close();
         });
     }
+
+
 </script>
 
 <h1>Welcome to SvelteKit</h1>

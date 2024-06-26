@@ -14,14 +14,12 @@ function createWebSocketStore() {
 
 			socket.addEventListener('open', () => {
 				update((state) => ({ ...state, isConnected: true }));
-				console.log('WebSocket connection opened.');
 				if (typeof onOpen === 'function') {
 					onOpen();
 				}
 			});
 
 			socket.addEventListener('message', (event) => {
-				console.log('[client] Message received', event.data);
 				if (typeof onMessage === 'function') {
 					onMessage(event.data);
 				}

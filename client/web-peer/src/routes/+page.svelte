@@ -1,15 +1,22 @@
 <script>
     import { onMount, onDestroy } from 'svelte';
-    import { websocketStore } from '$lib/websocketStore';
+    import { Client } from '$lib/client';
     
+    let client = new Client();
+    client.onOpen = onOpen;
+    client.onClose = onClose;
+    client.onMessage = (message) => {
+        console.log('Received message:', message);
+    };
+
     onMount(() => {
-        websocketStore.connect('ws://localhost:3000/ws',
-            { onOpen, onMessage, onClose, onError }    
-        )
+        client.join('ws://localhost:3000/ws');
     });
 
     onDestroy(() => {
-        websocketStore.close();
+        if (client) {
+            client.leave();
+        }
     });
 
     function onOpen() {
@@ -18,14 +25,8 @@
     
     function onClose() {
         console.log('Disconnected from server');
-    }
-
-    function onError(event) {
-        console.error('Error:', event);
-    }
-
-    function onMessage(event) {
-        console.log('Message received:', event.data);
+        client.leave();
+        client = null;
     }
 
 </script>

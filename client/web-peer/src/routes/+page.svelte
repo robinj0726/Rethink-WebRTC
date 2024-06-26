@@ -14,7 +14,7 @@
             type,
             body,
         }; 
-        console.log('[client]Sent message: ', json);
+        console.log('[client]message sent: ', json);
         socket.send(JSON.stringify(json));
     };
 
@@ -28,7 +28,16 @@
         });
 
         socket.addEventListener("message", (event) => {
-            console.log("[client]Message from server ", event.data);
+            console.log('[client]message received', event.data);
+            const parsedMessage = JSON.parse(event.data);
+            switch (parsedMessage.type) {
+                case 'joined':
+                    const body = parsedMessage.body;
+                    console.log('users in this channel', body);
+                    break;            
+                default:
+                    break;
+            }
         });
 
         socket.addEventListener("close", () => {

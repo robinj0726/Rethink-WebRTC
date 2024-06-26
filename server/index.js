@@ -12,9 +12,10 @@ fastify.get("/hello", (request, reply) => {
   });
 });
 
-fastify.get("/hello-ws", { websocket: true }, (connection, req) => {
-  connection.socket.on("message", (message) => {
-    connection.socket.send("Hello Fastify WebSockets");
+fastify.get("/hello-ws", { websocket: true }, (socket, req) => {
+  socket.on("message", (message) => {
+    console.log("Received: ", message.toString());
+    socket.send("Hello Fastify WebSockets");
   });
 });
 

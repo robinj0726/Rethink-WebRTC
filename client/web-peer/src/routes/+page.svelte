@@ -86,274 +86,211 @@
 </div>
 
 <style>
-.hidden {
-  display: none;
-}
 
-.highlight {
-  background-color: #eee;
-  font-size: 1.2em;
-  margin: 0 0 30px 0;
-  padding: 0.2em 1.5em;
-}
+    @media screen and (min-width: 1000px) {
+    /* hack! to detect non-touch devices */
+    div#links a {
+            line-height: 0.8em;
+        }
+    }
 
-.warning {
-  color: red;
-  font-weight: 400;
-}
+    :global(body) {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        margin: 0;
+        padding: 1em;
+        word-break: break-word;
+    }
 
-@media screen and (min-width: 1000px) {
-  /* hack! to detect non-touch devices */
-  div#links a {
-    line-height: 0.8em;
-  }
-}
+    button {
+        background-color: #d84a38;
+        border: none;
+        border-radius: 2px;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.8em;
+        margin: 0 0 1em 0;
+        padding: 0.5em 0.7em 0.6em 0.7em;
+    }
 
-audio {
-  max-width: 100%;
-}
+    button:active {
+        background-color: #cf402f;
+    }
 
-body {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  margin: 0;
-  padding: 1em;
-  word-break: break-word;
-}
+    button:hover {
+        background-color: #cf402f;
+    }
 
-button {
-  background-color: #d84a38;
-  border: none;
-  border-radius: 2px;
-  color: white;
-  font-family: 'Roboto', sans-serif;
-  font-size: 0.8em;
-  margin: 0 0 1em 0;
-  padding: 0.5em 0.7em 0.6em 0.7em;
-}
+    button[disabled] {
+        color: #ccc;
+    }
 
-button:active {
-  background-color: #cf402f;
-}
+    button[disabled]:hover {
+        background-color: #d84a38;
+    }
 
-button:hover {
-  background-color: #cf402f;
-}
+    canvas {
+        background-color: #ccc;
+        max-width: 100%;
+        width: 100%;
+    }
 
-button[disabled] {
-  color: #ccc;
-}
+    code {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+    }
 
-button[disabled]:hover {
-  background-color: #d84a38;
-}
+    div#container {
+        margin: 0 auto 0 auto;
+        max-width: 60em;
+        padding: 1em 1.5em 1.3em 1.5em;
+    }
 
-canvas {
-  background-color: #ccc;
-  max-width: 100%;
-  width: 100%;
-}
+    div#links {
+        padding: 0.5em 0 0 0;
+    }
 
-code {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-}
+    h1 {
+        border-bottom: 1px solid #ccc;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        margin: 0 0 0.8em 0;
+        padding: 0 0 0.2em 0;
+    }
 
-div#container {
-  margin: 0 auto 0 auto;
-  max-width: 60em;
-  padding: 1em 1.5em 1.3em 1.5em;
-}
+    h2 {
+        color: #444;
+        font-weight: 500;
+    }
 
-div#links {
-  padding: 0.5em 0 0 0;
-}
+    h3 {
+        border-top: 1px solid #eee;
+        color: #666;
+        font-weight: 500;
+        margin: 10px 0 10px 0;
+        white-space: nowrap;
+    }
 
-h1 {
-  border-bottom: 1px solid #ccc;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-  margin: 0 0 0.8em 0;
-  padding: 0 0 0.2em 0;
-}
+    li {
+        margin: 0 0 0.4em 0;
+    }
 
-h2 {
-  color: #444;
-  font-weight: 500;
-}
+    img {
+        border: none;
+        max-width: 100%;
+    }
 
-h3 {
-  border-top: 1px solid #eee;
-  color: #666;
-  font-weight: 500;
-  margin: 10px 0 10px 0;
-  white-space: nowrap;
-}
+    p {
+        color: #444;
+        font-weight: 300;
+    }
 
-li {
-  margin: 0 0 0.4em 0;
-}
+    p#data {
+        border-top: 1px dotted #666;
+        font-family: Courier New, monospace;
+        line-height: 1.3em;
+        max-height: 1000px;
+        overflow-y: auto;
+        padding: 1em 0 0 0;
+    }
 
-html {
-  /* avoid annoying page width change
-  when moving from the home page */
-  overflow-y: scroll;
-}
+    p.borderBelow {
+        border-bottom: 1px solid #aaa;
+        padding: 0 0 20px 0;
+    }
 
-img {
-  border: none;
-  max-width: 100%;
-}
+    h1 span {
+        white-space: nowrap;
+    }
 
-input[type=radio] {
-  position: relative;
-  top: -1px;
-}
+    a {
+        color: #1D6EEE;
+        font-weight: 300;
+        text-decoration: none;
+    }
 
-p {
-  color: #444;
-  font-weight: 300;
-}
+    h1 a {
+        font-weight: 300;
+        margin: 0 10px 0 0;
+        white-space: nowrap;
+    }
 
-p#data {
-  border-top: 1px dotted #666;
-  font-family: Courier New, monospace;
-  line-height: 1.3em;
-  max-height: 1000px;
-  overflow-y: auto;
-  padding: 1em 0 0 0;
-}
+    a:hover {
+        color: #3d85c6;
+        text-decoration: underline;
+    }
 
-p.borderBelow {
-  border-bottom: 1px solid #aaa;
-  padding: 0 0 20px 0;
-}
+    a#viewSource {
+        display: block;
+        margin: 1.3em 0 0 0;
+        border-top: 1px solid #999;
+        padding: 1em 0 0 0;
+    }
 
-section p:last-of-type {
-  margin: 0;
-}
+    div#errorMsg p {
+        color: #F00;
+    }
 
-section {
-  border-bottom: 1px solid #eee;
-  margin: 0 0 30px 0;
-  padding: 0 0 20px 0;
-}
+    div#links a {
+        display: block;
+        line-height: 1.3em;
+        margin: 0 0 1.5em 0;
+    }
 
-section:last-of-type {
-  border-bottom: none;
-  padding: 0 0 1em 0;
-}
+    div.outputSelector {
+        margin: -1.3em 0 2em 0;
+    }
 
-select {
-  margin: 0 1em 1em 0;
-  position: relative;
-  top: -1px;
-}
+    p.description {
+        margin: 0 0 0.5em 0;
+    }
 
-h1 span {
-  white-space: nowrap;
-}
+    strong {
+        font-weight: 500;
+    }
 
-a {
-  color: #1D6EEE;
-  font-weight: 300;
-  text-decoration: none;
-}
+    textarea {
+        resize: none;
+        font-family: 'Roboto', sans-serif;
+    }
 
-h1 a {
-  font-weight: 300;
-  margin: 0 10px 0 0;
-  white-space: nowrap;
-}
+    video#localVideo {
+        margin: 0 20px 20px 0;
+    }
 
-a:hover {
-  color: #3d85c6;
-  text-decoration: underline;
-}
+    video {
+        background: #222;
+        margin: 0 0 20px 0;
+        --width: 45%;
+        width: var(--width);
+        height: calc(var(--width) * 0.75);
+    }
 
-a#viewSource {
-  display: block;
-  margin: 1.3em 0 0 0;
-  border-top: 1px solid #999;
-  padding: 1em 0 0 0;
-}
+    video#remoteVideo {
+        margin: 0 0 20px 0;
+    }
 
-div#errorMsg p {
-  color: #F00;
-}
+    @media screen and (max-width: 650px) {
 
-div#links a {
-  display: block;
-  line-height: 1.3em;
-  margin: 0 0 1.5em 0;
-}
+        h1 {
+            font-size: 24px;
+        }
+    }
 
-div.outputSelector {
-  margin: -1.3em 0 2em 0;
-}
+    @media screen and (max-width: 550px) {
+        button:active {
+            background-color: darkRed;
+        }
 
-p.description {
-  margin: 0 0 0.5em 0;
-}
+        h1 {
+            font-size: 22px;
+        }
+    }
 
-strong {
-  font-weight: 500;
-}
-
-textarea {
-  resize: none;
-  font-family: 'Roboto', sans-serif;
-}
-video#localVideo {
-  margin: 0 20px 20px 0;
-}
-
-video {
-  background: #222;
-  margin: 0 0 20px 0;
-  --width: 45%;
-  width: var(--width);
-  height: calc(var(--width) * 0.75);
-}
-
-ul {
-  margin: 0 0 0.5em 0;
-}
-
-fieldset {
-  margin: 0 0 1em 0;
-}
-
-fieldset > select {
-  margin-top: 1em;
-}
-
-@media screen and (max-width: 650px) {
-  .highlight {
-    font-size: 1em;
-    margin: 0 0 20px 0;
-    padding: 0.2em 1em;
-  }
-
-  h1 {
-    font-size: 24px;
-  }
-}
-
-@media screen and (max-width: 550px) {
-  button:active {
-    background-color: darkRed;
-  }
-
-  h1 {
-    font-size: 22px;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  h1 {
-    font-size: 20px;
-  }
-}
+    @media screen and (max-width: 450px) {
+        h1 {
+            font-size: 20px;
+        }
+    }
 
 </style>
